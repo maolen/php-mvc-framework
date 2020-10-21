@@ -1,0 +1,7 @@
+{
+    "name": "kamil/php-mvc-framework",
+    "description": "My first PHP MVC Framework",
+    "type": "project",
+    "license": "MIT",
+    "require": {}
+}
