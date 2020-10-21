@@ -1,7 +1,16 @@
 {
-    "name": "kamil/php-mvc-framework",
-    "description": "My first PHP MVC Framework",
-    "type": "project",
-    "license": "MIT",
-    "require": {}
+  "name": "kamil/php-mvc-framework",
+  "description": "My first PHP MVC Framework",
+  "type": "project",
+  "license": "MIT",
+  "require": {
+    "laminas/laminas-diactoros": "^2.4",
+    "laminas/laminas-httphandlerrunner": "^1.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "./app",
+      "App\\Framework\\": "./framework"
+    }
+  }
 }
