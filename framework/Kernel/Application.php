@@ -26,9 +26,12 @@ final class Application
         self::$app = new self($request);
         return self::$app;
     }
-    /**
-     * TODO: Должен вернуть Response для emit
-     */
+
+    protected function registerProviders()
+    {
+
+    }
+
     function start()
     {
         echo "Я молодец!";
@@ -36,6 +39,6 @@ final class Application
 
     function request()
     {
-
+        return $this->request;
     }
 }
