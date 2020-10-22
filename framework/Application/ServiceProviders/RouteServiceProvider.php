@@ -15,12 +15,20 @@ class RouteServiceProvider extends ServiseProvider
     function register()
     {
         $this->router = new Router;
+        $this->registerRoutes();
     }
 
     function boot()
     {
         $request = $this->app->request();
         $this->response = $this->router->dispatch($request);
+    }
+
+    function registerRoutes()
+    {
+        $this->router->group('', function ($router){
+            require_once path('routes/web.php');
+        });
     }
 
     function router()

@@ -4,6 +4,7 @@
 namespace App\Framework\Kernel;
 
 
+use App\Framework\Application\ServiceProviders\RouteServiceProvider;
 use Psr\Http\Message\ServerRequestInterface;
 
 final class Application
@@ -11,10 +12,13 @@ final class Application
     /** @var self */
     protected static $app;
     protected $request;
+    protected $providers;
 
     protected function __construct(ServerRequestInterface $request)
     {
         $this->request = $request;
+        $this->providers = new ServiceProviderBag($this);
+        $this->registerProviders();
     }
 
     public static function app(ServerRequestInterface $request = null)
@@ -29,12 +33,20 @@ final class Application
 
     protected function registerProviders()
     {
-
+        foreach (config('app.providers', []) as $provider) {
+            $this->providers->register($provider);
+        }
     }
 
     function start()
     {
-        echo "Я молодец!";
+        foreach (config('app.providers', []) as $provider) {
+            $this->providers->boot($provider);
+        }
+
+        return $this->providers
+            ->get(RouteServiceProvider::class)
+            ->response();
     }
 
     function request()
